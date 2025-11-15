@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiYouth - Empowering Students</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+        }
+
+        /* ========== AUTH PAGES STYLES ========== */
+        .auth-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .auth-left {
+            flex: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-left::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+        }
+
+        .auth-left::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            bottom: -50px;
+            right: -50px;
+        }
+
+        .logo-container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            margin: 0 auto 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .brand-name {
+            font-size: 42px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .brand-tagline {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            max-width: 400px;
+        }
+
+        .feature-icons {
+            display: flex;
+            gap: 40px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        .feature-icon i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .auth-right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background: #f5f5f7;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            background: #f0f0f5;
+            border-radius: 12px;
+            padding: 5px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #666;
+        }
+
+        .auth-tab.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e5e5ea;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #999;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .demo-info {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* ========== DASHBOARD STYLES ========== */
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: white;
+            padding: 30px 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            padding: 0 10px;
+        }
+
+        .sidebar-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .sidebar-logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1d1d1f;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 5px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            color: #666;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .nav-link i {
+            font-size: 18px;
+            width: 20px;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 30px;
+            background: #f5f5f7;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .top-bar-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .action-btn {
+            padding: 10px 20px;
+            border: 2px solid #e5e5ea;
+            background: white;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+        }
+
+        .action-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+
+        .action-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* ========== COMMUNITY FEED ========== */
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: #666;
+            font-size: 15px;
+        }
+
+        .post-composer {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .post-textarea {
+            width: 100%;
+            border: 2px solid #e5e5ea;
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            resize: vertical;
+            min-height: 120px;
+            margin-bottom: 15px;
+        }
+
+        .post-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .media-options {
+            display: flex;
+            gap: 15px;
+        }
+
+        .media-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 15px;
+            border: none;
+            background: #f0f0f5;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .media-btn:hover {
+            background: #e5e5ea;
+        }
+
+        .feed-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .post-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .post-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .author-info h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .author-info p {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .post-menu {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #999;
+            cursor: pointer;
+        }
+
+        .post-content {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .post-footer {
+            display: flex;
+            gap: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f5;
+        }
+
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .post-action:hover {
+            color: #667eea;
+        }
+
+        /* ========== MESSAGES PAGE ========== */
+        .messages-container {
+            display: flex;
+            gap: 20px;
+            height: calc(100vh - 180px);
+        }
+
+        .conversations-panel {
+            width: 320px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow-y: auto;
+        }
+
+        .panel-header {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1d1d1f;
+        }
+
+        .conversation-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 8px;
+        }
+
+        .conversation-item:hover, .conversation-item.active {
+            background: #f0f0f5;
+        }
+
+        .conversation-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .conversation-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .conversation-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #1d1d1f;
+        }
+
+        .conversation-info p {
+            font-size: 13px;
+            color: #999;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .conversation-time {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .chat-panel {
+            flex: 1;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f5;
+            margin-bottom: 20px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .message-content {
+            flex: 1;
+        }
+
+        .message-sender {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: #1d1d1f;
+        }
+
+        .message-text {
+            background: #f0f0f5;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .message-time {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 12px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f5;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e5e5ea;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .send-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* ========== NOTIFICATIONS PAGE ========== */
+        .notifications-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .mark-read-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #f0f0f5;
+            border: none;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #666;
+        }
+
+        .mark-read-btn:hover {
+            background: #e5e5ea;
+        }
+
+        .notifications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .notification-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            transition: all 0.3s;
+        }
+
+        .notification-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .notification-card.unread {
+            background: #f8f7ff;
+            border-left: 4px solid #667eea;
+        }
+
+        .notification-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 6px;
+            color: #1d1d1f;
+        }
+
+        .notification-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .notification-time {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .notification-menu {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #999;
+            cursor: pointer;
+        }
+
+        /* ========== PROFILE PAGE ========== */
+        .profile-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .profile-avatar-large {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .profile-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1d1d1f;
+        }
+
+        .profile-role {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .profile-bio {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .profile-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+            font-size: 15px;
+        }
+
+        .contact-item i {
+            color: #667eea;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            padding: 25px 0;
+            border-top: 2px solid #f0f0f5;
+            border-bottom: 2px solid #f0f0f5;
+            margin-bottom: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .logout-btn {
+            padding: 14px 40px;
+            background: #ff3b30;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 59, 48, 0.3);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+            }
+
+            .auth-left, .auth-right {
+                padding: 30px 20px;
+            }
+
+            .sidebar {
+                width: 70px;
+                padding: 20px 10px;
+            }
+
+            .sidebar-logo-text,
+            .nav-link span {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 70px;
+                padding: 20px;
+            }
+
+            .messages-container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .conversations-panel {
+                width: 100%;
+            }
+
+            .profile-stats {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== LOGIN PAGE ========== -->
+    <div id="loginPage" class="auth-container page active">
+        <div class="auth-left">
+            <div class="logo-container">
+                <div class="logo">📱</div>
+                <h1 class="brand-name">DigiYouth</h1>
+                <p class="brand-tagline">Empowering students, activists and social workers to create meaningful change together.</p>
+            </div>
+            <div class="feature-icons">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                    <span>Short Videos</span>
+                </div>
+                <div class="feature-icon">
+                    <i class="fas fa-comments"></i>
+                    <span>Connect</span>
+                </div>
+                <div class="feature-icon">
+                    <i class="fas fa-bell"></i>
+                    <span>Updates</span>
+                </div>
+            </div>
+        </div>
+        <div class="auth-right">
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="showTab('login')">Login</button>
+                    <button class="auth-tab" onclick="showTab('signup')">Sign Up</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="loginTab" class="tab-content active">
+                    <div class="form-group">
+                        <label class="form-label">Role</label>
+                        <select class="form-select" id="loginRole">
+                            <option>Student</option>
+                            <option>Teacher</option>
+                            <option>Admin</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" placeholder="your.email@digiyouth.org" id="loginEmail">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" placeholder="••••••••" id="loginPassword">
+                    </div>
+                    <button class="submit-btn" onclick="login()">Log In</button>
+                    <p class="demo-info">Demo: demo@digiyouth.org / password: demo123</p>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="signupTab" class="tab-content">
+                    <div class="form-group">
+                        <label class="form-label">Role</label>
+                        <select class="form-select" id="signupRole">
+                            <option>Student</option>
+                            <option>Teacher</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" placeholder="John Doe" id="signupName">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" placeholder="your.email@digiyouth.org" id="signupEmail">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" placeholder="••••••••" id="signupPassword">
+                    </div>
+                    <button class="submit-btn" onclick="signup()">Create Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== DASHBOARD - COMMUNITY FEED ========== -->
+    <div id="feedPage" class="dashboard page" style="display: none;">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">DY</div>
+                <span class="sidebar-logo-text">DigiYouth</span>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('messagesPage')">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>Messages</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('notificationsPage')">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('profilePage')">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h2 style="font-size: 24px; font-weight: 700;">Community Feed</h2>
+                <div class="top-bar-actions">
+                    <button class="action-btn">
+                        <i class="fas fa-rss"></i> Feed
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-bell"></i> Chat
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-clock"></i> Notifications
+                    </button>
+                    <button class="action-btn primary">
+                        <i class="fas fa-plus"></i> Contributions
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-user"></i> Profile
+                    </button>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h1 class="page-title">Community Feed</h1>
+                <p class="page-subtitle">Connect with students, activists, and social workers. Share ideas and build communities.</p>
+            </div>
+
+            <div class="post-composer">
+                <textarea class="post-textarea" placeholder="What's happening in your community?"></textarea>
+                <div class="post-actions">
+                    <div class="media-options">
+                        <button class="media-btn">
+                            <i class="fas fa-image"></i> Image
+                        </button>
+                        <button class="media-btn">
+                            <i class="fas fa-video"></i> Video
+                        </button>
+                    </div>
+                    <button class="action-btn primary" style="margin: 0;">
+                        <i class="fas fa-paper-plane"></i> Post
+                    </button>
+                </div>
+            </div>
+
+            <div class="feed-container">
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="author-avatar">SP</div>
+                            <div class="author-info">
+                                <h4>Shravan Patil</h4>
+                                <p>5 hours</p>
+                            </div>
+                        </div>
+                        <button class="post-menu">⋯</button>
+                    </div>
+                    <div class="post-content">
+                        <p>Just finished organizing our campus blood drive! 🩸 Together we collected 120+ units. This will help save so many lives. #CommunityImpact #SocialGood #YouthLeadership</p>
+                    </div>
+                    <div class="post-footer">
+                        <button class="post-action">
+                            <i class="fas fa-thumbs-up"></i> 54
+                        </button>
+                        <button class="post-action">
+                            <i class="fas fa-comment"></i> 8
+                        </button>
+                        <button class="post-action">
+                            <i class="fas fa-share"></i> Share
+                        </button>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="author-avatar">RM</div>
+                            <div class="author-info">
+                                <h4>Ravi Mehta</h4>
+                                <p>1 day ago</p>
+                            </div>
+                        </div>
+                        <button class="post-menu">⋯</button>
+                    </div>
+                    <div class="post-content">
+                        <p>Our environmental club planted 200 trees this weekend! 🌳 Every small action counts toward fighting climate change. Who wants to join us next month?</p>
+                    </div>
+                    <div class="post-footer">
+                        <button class="post-action">
+                            <i class="fas fa-thumbs-up"></i> 128
+                        </button>
+                        <button class="post-action">
+                            <i class="fas fa-comment"></i> 23
+                        </button>
+                        <button class="post-action">
+                            <i class="fas fa-share"></i> Share
+                        </button>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="author-avatar">PS</div>
+                            <div class="author-info">
+                                <h4>Priya Sharma</h4>
+                                <p>2 days ago</p>
+                            </div>
+                        </div>
+                        <button class="post-menu">⋯</button>
+                    </div>
+                    <div class="post-content">
+                        <p>We launched free coding workshops for underprivileged kids in our neighborhood. Technology should be accessible to everyone! 💻 If you want to volunteer as a mentor, DM me.</p>
+                    </div>
+                    <div class="post-footer">
+                        <button class="post-action">
+                            <i class="fas fa-thumbs-up"></i> 96
+                        </button>
+                        <button class="post-action">
+                            <i class="fas fa-comment"></i> 15
+                        </button>
+                        <button class="post-action">
+                            <i class="fas fa-share"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ========== MESSAGES PAGE ========== -->
+    <div id="messagesPage" class="dashboard page" style="display: none;">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">DY</div>
+                <span class="sidebar-logo-text">DigiYouth</span>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('feedPage')">
+                            <i class="fas fa-home"></i>
+                            <span>Feed</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active" onclick="showPage('messagesPage')">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>Messages</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('notificationsPage')">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('profilePage')">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h2 style="font-size: 24px; font-weight: 700;">Messages</h2>
+                <div class="top-bar-actions">
+                    <button class="action-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="action-btn primary">
+                        <i class="fas fa-edit"></i> New Message
+                    </button>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h1 class="page-title">Messages</h1>
+                <p class="page-subtitle">Connect with members and AI assistant</p>
+            </div>
+
+            <div class="messages-container">
+                <div class="conversations-panel">
+                    <h3 class="panel-header">Conversations</h3>
+                    
+                    <div class="conversation-item active">
+                        <div class="conversation-avatar">SM</div>
+                        <div class="conversation-info">
+                            <h4>Prof. Sarah Martinez</h4>
+                            <p>See you there!</p>
+                        </div>
+                        <span class="conversation-time">9:41am</span>
+                    </div>
+
+                    <div class="conversation-item">
+                        <div class="conversation-avatar">AI</div>
+                        <div class="conversation-info">
+                            <h4>AI Support Bot</h4>
+                            <p>I support AI bots or...</p>
+                        </div>
+                        <span class="conversation-time">Yesterday</span>
+                    </div>
+
+                    <div class="conversation-item">
+                        <div class="conversation-avatar">RC</div>
+                        <div class="conversation-info">
+                            <h4>Rohan Chavan</h4>
+                            <p>Working on the youth empowerment program. Would be great to collaborate on the research!</p>
+                        </div>
+                        <span class="conversation-time">2d ago</span>
+                    </div>
+                </div>
+
+                <div class="chat-panel">
+                    <div class="chat-header">
+                        <div class="conversation-avatar">SM</div>
+                        <div>
+                            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">Prof. Sarah Martinez</h3>
+                            <p style="font-size: 14px; color: #999;">Active now</p>
+                        </div>
+                    </div>
+
+                    <div class="chat-messages">
+                        <div class="message">
+                            <div class="message-avatar">SM</div>
+                            <div class="message-content">
+                                <div class="message-sender">Prof. Sarah Martinez</div>
+                                <div class="message-text">Hi Rohan! I had a question about the community tech initiative.</div>
+                                <div class="message-time">45 mins ago</div>
+                            </div>
+                        </div>
+
+                        <div class="message">
+                            <div class="message-avatar">RC</div>
+                            <div class="message-content">
+                                <div class="message-sender">Rohan Chavan</div>
+                                <div class="message-text">Of course! What would you like to know?</div>
+                                <div class="message-time">42 mins ago</div>
+                            </div>
+                        </div>
+
+                        <div class="message">
+                            <div class="message-avatar">SM</div>
+                            <div class="message-content">
+                                <div class="message-sender">Prof. Sarah Martinez</div>
+                                <div class="message-text">I'm working on the youth empowerment program. Would be great to collaborate on the research!</div>
+                                <div class="message-time">40 mins ago</div>
+                            </div>
+                        </div>
+
+                        <div class="message">
+                            <div class="message-avatar">RC</div>
+                            <div class="message-content">
+                                <div class="message-sender">Rohan Chavan</div>
+                                <div class="message-text">That sounds fantastic! Let's meet tomorrow at 2 PM?</div>
+                                <div class="message-time">38 mins ago</div>
+                            </div>
+                        </div>
+
+                        <div class="message">
+                            <div class="message-avatar">SM</div>
+                            <div class="message-content">
+                                <div class="message-sender">Prof. Sarah Martinez</div>
+                                <div class="message-text">See you there!</div>
+                                <div class="message-time">Just now</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" placeholder="Message Prof. Sarah Martinez...">
+                        <button class="send-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ========== NOTIFICATIONS PAGE ========== -->
+    <div id="notificationsPage" class="dashboard page" style="display: none;">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">DY</div>
+                <span class="sidebar-logo-text">DigiYouth</span>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('feedPage')">
+                            <i class="fas fa-home"></i>
+                            <span>Feed</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('messagesPage')">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>Messages</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active" onclick="showPage('notificationsPage')">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('profilePage')">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h2 style="font-size: 24px; font-weight: 700;">Notifications</h2>
+                <div class="top-bar-actions">
+                    <button class="action-btn">
+                        <i class="fas fa-rss"></i> Feed
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-bell"></i> Chat
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-clock"></i> Notifications
+                    </button>
+                    <button class="action-btn primary">
+                        <i class="fas fa-user"></i> Profile
+                    </button>
+                </div>
+            </div>
+
+            <div class="notifications-header">
+                <div class="page-header">
+                    <h1 class="page-title">Notifications</h1>
+                    <p class="page-subtitle">Stay up to date with your activities</p>
+                </div>
+                <button class="mark-read-btn">
+                    <i class="fas fa-check-double"></i> Mark all read
+                </button>
+            </div>
+
+            <div class="notifications-list">
+                <div class="notification-card unread">
+                    <div class="notification-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h4 class="notification-title">New Workshop Announcement</h4>
+                        <p class="notification-text">Join our 'Building Inclusive Communities' workshop commencing at 1:30 PM</p>
+                        <span class="notification-time">2 hrs ago</span>
+                    </div>
+                    <button class="notification-menu">⋯</button>
+                </div>
+
+                <div class="notification-card">
+                    <div class="notification-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h4 class="notification-title">Community Event Update</h4>
+                        <p class="notification-text">Campus cleanup drive has been rescheduled. Get the latest here.</p>
+                        <span class="notification-time">Yesterday</span>
+                    </div>
+                    <button class="notification-menu">⋯</button>
+                </div>
+
+                <div class="notification-card">
+                    <div class="notification-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h4 class="notification-title">New Member Joined</h4>
+                        <p class="notification-text">Anita Desai joined your Environmental Action group</p>
+                        <span class="notification-time">2 days ago</span>
+                    </div>
+                    <button class="notification-menu">⋯</button>
+                </div>
+
+                <div class="notification-card">
+                    <div class="notification-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h4 class="notification-title">Achievement Unlocked</h4>
+                        <p class="notification-text">Congratulations! You've completed 10 community service hours this month</p>
+                        <span class="notification-time">3 days ago</span>
+                    </div>
+                    <button class="notification-menu">⋯</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ========== PROFILE PAGE ========== -->
+    <div id="profilePage" class="dashboard page" style="display: none;">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">DY</div>
+                <span class="sidebar-logo-text">DigiYouth</span>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('feedPage')">
+                            <i class="fas fa-home"></i>
+                            <span>Feed</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('messagesPage')">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>Messages</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('notificationsPage')">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active" onclick="showPage('profilePage')">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h2 style="font-size: 24px; font-weight: 700;">Profile</h2>
+                <div class="top-bar-actions">
+                    <button class="action-btn">
+                        <i class="fas fa-rss"></i> Feed
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-bell"></i> Chat
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-clock"></i> Notifications
+                    </button>
+                    <button class="action-btn primary">
+                        <i class="fas fa-cog"></i> Edit Profile
+                    </button>
+                </div>
+            </div>
+
+            <div class="profile-container">
+                <div class="profile-card">
+                    <div class="profile-avatar-large">S</div>
+                    <h2 class="profile-name">Shravi</h2>
+                    <p class="profile-role">Student</p>
+                    <p class="profile-bio">We live, not just for ourselves, but to share our passion for social change.</p>
+                    
+                    <div class="profile-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>shravi@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-cake-candles"></i>
+                            <span>Wed • 17 years ago</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Posts</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">45</span>
+                            <span class="stat-label">Contributions</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Followers</span>
+                        </div>
+                    </div>
+
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Log Out
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Tab Switching for Auth Pages
+        function showTab(tabName) {
+            document.querySelectorAll('.auth-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
+        // Page Navigation
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
+            document.getElementById(pageName).style.display = pageName === 'loginPage' ? 'flex' : 'flex';
+            
+            // Update active nav links
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            event.target.closest('.nav-link').classList.add('active');
+        }
+
+        // Login Function
+        function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (email === 'demo@digiyouth.org' && password === 'demo123') {
+                alert('Login successful!');
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('feedPage').style.display = 'flex';
+            } else if (email && password) {
+                alert('Login successful!');
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('feedPage').style.display = 'flex';
+            } else {
+                alert('Please enter your credentials');
+            }
+        }
+
+        // Signup Function
+        function signup() {
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            if (name && email && password) {
+                alert('Account created successfully!');
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('feedPage').style.display = 'flex';
+            } else {
+                alert('Please fill all fields');
+            }
+        }
+
+        // Logout Function
+        function logout() {
+            if (confirm('Are you sure you want to log out?')) {
+                document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
+                document.getElementById('loginPage').style.display = 'flex';
+                
+                // Clear form fields
+                document.getElementById('loginEmail').value = '';
+                document.getElementById('loginPassword').value = '';
+            }
+        }
+
+        // Enter key support for login
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginInputs = document.querySelectorAll('#loginTab input');
+            loginInputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        login();
+                    }
+                });
+            });
+
+            const signupInputs = document.querySelectorAll('#signupTab input');
+            signupInputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        signup();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html><a href="#" class="nav-link active" onclick="showPage('feedPage')">
+                            <i class="fas fa-home"></i>
+                            <span>Feed</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        
