@@ -1,1 +1,0 @@
-console.log('DigiYouth app ready');
