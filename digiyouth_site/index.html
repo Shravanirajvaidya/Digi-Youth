@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DigiYouth — Login</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/app.js"></script>
+</head>
+<body class="auth-page">
+  <div class="auth-container">
+    <div class="auth-left">
+      <div class="logo-container">
+        <div class="logo">📱</div>
+        <h1 class="brand-name">DigiYouth</h1>
+        <p class="brand-tagline">Empowering students, activists and social workers to create meaningful change together.</p>
+      </div>
+      <div class="feature-icons">
+        <div class="feature-icon"><i class="fa-solid fa-users"></i><span>Short Videos</span></div>
+        <div class="feature-icon"><i class="fa-solid fa-comments"></i><span>Connect</span></div>
+        <div class="feature-icon"><i class="fa-solid fa-bell"></i><span>Updates</span></div>
+      </div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login">Login</button>
+          <button class="auth-tab" data-tab="signup">Sign Up</button>
+        </div>
+        <div id="loginTab" class="tab-content active">
+          <label class="form-label">Role</label>
+          <select id="loginRole" class="form-select">
+            <option>Student</option><option>Teacher</option><option>Admin</option>
+          </select>
+          <label class="form-label">Email</label>
+          <input id="loginEmail" class="form-input" type="email" placeholder="you@digiyouth.org"/>
+          <label class="form-label">Password</label>
+          <input id="loginPassword" class="form-input" type="password" placeholder="••••••••"/>
+          <button class="submit-btn" id="loginBtn">Log In</button>
+          <p class="demo-info">Demo: demo@digiyouth.org / password: demo123</p>
+        </div>
+        <div id="signupTab" class="tab-content">
+          <label class="form-label">Role</label>
+          <select id="signupRole" class="form-select"><option>Student</option><option>Teacher</option></select>
+          <label class="form-label">Full Name</label>
+          <input id="signupName" class="form-input" type="text" placeholder="John Doe"/>
+          <label class="form-label">Email</label>
+          <input id="signupEmail" class="form-input" type="email" placeholder="you@digiyouth.org"/>
+          <label class="form-label">Password</label>
+          <input id="signupPassword" class="form-input" type="password" placeholder="••••••••"/>
+          <button class="submit-btn" id="signupBtn">Create Account</button>
+        </div>
+        <div style="margin-top:14px; text-align:center;">
+          <a href="feed.html" class="link-small">Skip (open feed demo)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
