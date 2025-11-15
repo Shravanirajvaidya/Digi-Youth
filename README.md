@@ -1,2 +1,2 @@
-# Digi-Youth
+# Docs
 Digi-Youth project files
