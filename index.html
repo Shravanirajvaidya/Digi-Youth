@@ -17,7 +17,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, setDoc, updateDoc , getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
         const firebaseConfig = {
     apiKey: "AIzaSyD9AdowkjtARGijQ-O_f8h0NMbcllwQ-0g",
@@ -37,7 +37,7 @@
         } catch(e) { console.warn("Firebase not configured — Demo mode active."); }
 
         window.firebaseReady = firebaseReady;
-        window.fbFns = { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, sendPasswordResetEmail, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, setDoc, updateDoc };
+        window.fbFns = { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, sendPasswordResetEmail, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, setDoc, updateDoc , getDocs };
     </script>
 
     <style>
@@ -2085,10 +2085,24 @@ function exportStudentCSV(){
 
 // ===== TEACHER DASHBOARD =====
 function loadTeacherDashboard(){
-    // Reset to approvals tab on load
     document.getElementById('tpApprovalsPanel').style.display='block';
     document.getElementById('tpDataPanel').style.display='none';
     document.querySelectorAll('#teacherPage .neboard-tab').forEach((t,i)=>t.classList.toggle('active',i===0));
+
+    if(window.firebaseReady && window.firebaseDB){
+        const {collection, getDocs} = window.fbFns;
+        getDocs(collection(window.firebaseDB,'registrations')).then(snap=>{
+            allStudents = snap.docs.map(d=>({id:d.id,...d.data()}));
+            updateTeacherStats();
+            rebuildNav('teacherPage');
+        }).catch(e=>{ console.error(e); updateTeacherStats(); });
+    } else { 
+        updateTeacherStats(); 
+        rebuildNav('teacherPage'); 
+    }
+}
+
+function updateTeacherStats(){
     const pending=allStudents.filter(s=>s.status==='pending');
     const approved=allStudents.filter(s=>s.status==='approved');
     const rejected=allStudents.filter(s=>s.status==='rejected');
@@ -2100,7 +2114,6 @@ function loadTeacherDashboard(){
     document.getElementById('tc_approved').textContent=approved.length;
     document.getElementById('tc_rejected').textContent=rejected.length;
     renderStudentTable(pending);
-    rebuildNav('teacherPage');
 }
 
 function filterStudents(status, btn){
